@@ -15,14 +15,14 @@ export function Wishlist() {
 				<div className="col-12 text-center">
 					<h4 className="margin-top">PRODUCTS</h4>
 				</div>
-					{!products?(
+					{!db_product?(
 						loading
-					): products.map((item, i) => {
-						if(item.fav){
+					): Object.keys(products).map(function(i) {
+						if(products[i].fav){
 							empty=false;
 							return (
 								<div key={i} className="col-4 margin-top">
-									<Product {...item} />
+									<Product {...products[i]} />
 								</div>
 							)
 						}

@@ -23,12 +23,12 @@ export function Products() {
 				<div className="col-12 text-center">
 					<h4 className="margin-top">PRODUCTS</h4>
 				</div>
-					{!products?(
+					{!db_product?(
 						loading
-					): products.map((item, i) => {
+					): Object.keys(products).map(function(i) {
 						return (
 							<div key={i} className="col-4 margin-top">
-								<Product {...item} />
+								<Product {...products[i]} />
 							</div>
 						);
 					})}

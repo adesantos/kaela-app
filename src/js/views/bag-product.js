@@ -40,10 +40,8 @@ export function BagProduct(props) {
 	checkCount(count);
 
 	function checkCount(c){
-		console.log("dentro de checkCero");
 		if(c == 0){
 			handleRemove(true);
-			console.log("si es cero");
 		}
 	}
 

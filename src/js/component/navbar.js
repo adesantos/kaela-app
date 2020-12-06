@@ -65,6 +65,11 @@ export const Navbar = () => {
 							<i className="fa fa-shopping-bag" />
 						</Link>
 					</li>
+					<li className="nav-item">
+						<Link to="/bag" className="nav-link" href="#">
+							<i className="fa fa-sign-out" />
+						</Link>
+					</li>
 				</ul>
 			</div>
 		</nav>

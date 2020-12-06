@@ -11,7 +11,7 @@ export function Bag() {
 	const [total, setTotal] = useState(0);
 	const [child, setChild] = useState();
 	var products = db_product;
-	console.log(products);
+	//console.log(products);
 	function handleChildClick(amount, id){
 		setChild(id);
 		setSubtotal(amount);
@@ -42,13 +42,13 @@ export function Bag() {
 						<div className="col-3 shop-col">Price</div>
 					</div>
 					<div className="row">
-						{!products?(
+						{!db_product?(
 							loading
-						): Object.keys(products).map((item, i) => {
-							if(item.qty>0){
+						): Object.keys(products).map(function(i) {
+							if(products[i].qty>0){
 								return (
 									<div key={i} className="col-12">
-										<BagProduct {...item} onChildClick={handleChildClick} />
+										<BagProduct {...products[i]} onChildClick={handleChildClick} />
 									</div>
 								);
 							}
