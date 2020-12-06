@@ -1,28 +1,34 @@
 import React, { useState } from "react";
-import product_img from "../../img/img6.jpg";
+import firebase from '../config';
 import { Link } from "react-router-dom";
-//import { Context } from "../store/appContext";
+import { useDownloadURL } from "react-firebase-hooks/storage";
 
-export function Product() {
-	//HAcer condicional si el producto viene con liked estado inicial es true
-	const [isLiked, updateLike] = useState(false);
+export function Product(props) {
+	const dbImgs = firebase.storage().ref(props.img);
+	const product = firebase.database().ref("products/"+props.id);
+	const [imgUrl, loading, error] = useDownloadURL(dbImgs);
+	const [isLiked, updateLike] = useState(props.fav);
+	
 	const handleLike = () => {
 		updateLike(!isLiked);
-		//send update to database
+		product.update({'fav': !isLiked});
 	};
+
+	//console.log(img);
+	//console.log(props);
 	return (
 		<div key={1} className="">
-			<Link to="/single-product">
-				<img src={product_img} className="img-fluid" alt="..." />
+			<Link to={"/single-product/"+props.id+"/"+props.fav}>
+				<img src={(imgUrl)? imgUrl: loading} className={"img-fluid"} alt="..." />
 			</Link>
 			<Link to="/single-product" className="product-name">
-				<span>Name</span>
+				<span>{props.title}</span>
 			</Link>
 			<button className="like" onClick={handleLike}>
 				<i className={isLiked ? "fa fa-heart" : "fa fa-heart-o"} />
 			</button>
 			<p>
-				<b>$25.00</b>
+				<b>${parseFloat(props.price).toFixed(2)}</b>
 			</p>
 		</div>
 	);

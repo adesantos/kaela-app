@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 //import { Link } from "react-router-dom";
 import { BagProduct } from "./bag-product";
+import firebase from '../config';
+import { useObjectVal } from "react-firebase-hooks/database";
 
 export function Bag() {
+	const bag = firebase.database().ref("bag");
+	const [db_product, loading, error] =  useObjectVal(bag);
+	const [subtotal, setSubtotal] = useState();
+	const [total, setTotal] = useState(0);
+	const [child, setChild] = useState();
+	var products = db_product;
+	console.log(products);
+	function handleChildClick(amount, id){
+		setChild(id);
+		setSubtotal(amount);
+		calculateTotal(amount, id);
+		//console.log(amount);
+		//console.log(id);
+	}
+	function calculateTotal(amount, id){
+		if(subtotal && child){
+			if(id==child){
+				setTotal(amount);
+			}else{
+				setTotal(subtotal+amount);
+			}
+		}
+	}
 	return (
 		<div className="col-12 products padding-bottom">
 			<div className="row">
@@ -16,16 +41,28 @@ export function Bag() {
 						<div className="col-3 shop-col">Qty</div>
 						<div className="col-3 shop-col">Price</div>
 					</div>
-					<BagProduct />
+					<div className="row">
+						{!products?(
+							loading
+						): Object.keys(products).map((item, i) => {
+							if(item.qty>0){
+								return (
+									<div key={i} className="col-12">
+										<BagProduct {...item} onChildClick={handleChildClick} />
+									</div>
+								);
+							}
+						})}
+					</div>
 				</div>
 				<div className="col-4 margin-top o-summary">
 					<h3>Order Summary</h3>
 					<hr />
 					<span>Subtotal</span>
 					<span className="total">
-						<b>US $00.00</b>
+						<b>US ${parseFloat(total).toFixed(2)}</b>
 					</span>
-					<button className="btn btn-block btn-checkout">CHECKOUT</button>
+					<button className="btn btn-block btn-pink btn-checkout">CHECKOUT</button>
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,4 @@
+import React from 'react';
 import firebase from "firebase";
 //import { PureComponent } from "react";
 //import config from "../config";
@@ -8,20 +9,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			getProducts: () => {
-				var products = getStore().products;
-				var dbProd = [];
-				firebase
+				//var db;
+				/*const useStateWithLocalStorage = localStorageKey => {
+					const [value, setValue] = React.useState(
+					  localStorage.getItem(localStorageKey) || ''
+					);
+				   
+					React.useEffect(() => {
+					  localStorage.setItem(localStorageKey, value);
+					}, [value]);
+				   
+					return [value, setValue];
+				  };
+
+				const [value, setValue] = useStateWithLocalStorage(db);*/
+				/*firebase
 					.database()// storageBucket o storage
 					.ref("/products")//  /img6.jpg
 					.on("value", snapshot => {
-						var db = snapshot.val();
-						//db.forEach(elem => {
-							//console.log(db);
-							dbProd = db;
-							//prod.push(elem);
-						//});
-					});
-
+						db = snapshot.val();
+			});*/
 			//	console.log(dbProd);
 
 				//return products;

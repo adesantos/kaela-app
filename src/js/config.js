@@ -1,7 +1,8 @@
-import firebase from "firebase/app";
-import "firebase/auth";
+import firebase from "firebase";
+import "firebase/database";
+import "firebase/storage";
 
-const config = firebase.initializeApp({
+const config = {
 	apiKey: "AIzaSyDQ58hDJwV1XhDpbYsrvmITY8EagCXZ398",
 	authDomain: "kaela-1a854.firebaseapp.com",
 	databaseURL: "https://kaela-1a854.firebaseio.com",
@@ -10,6 +11,8 @@ const config = firebase.initializeApp({
 	messagingSenderId: "170617101253",
 	appId: "1:170617101253:web:e1d40844568293783c89ac",
 	measurementId: "G-GE3NL6BVM5"
-});
+};
 
-export default config;
+firebase.initializeApp(config);
+
+export default firebase;

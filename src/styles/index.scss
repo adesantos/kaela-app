@@ -261,8 +261,9 @@ hr{
         font-size: 21px;
     }
     .btn-checkout{
-        color: #FFF;
+        height: 50px;
         margin-top: 50px;
+        font-weight: 700;
     }
 }
 
@@ -283,11 +284,6 @@ hr{
     .product-price{
         font-size: 20px;
         color: #f783ac;
-    }
-    .add-bag{
-        width: 60%;
-        height: 50px;
-        font-weight: 700;
     }
     .div-counter{
         padding: 0;
@@ -338,6 +334,14 @@ hr{
                 font-size: 25px;
                 vertical-align: middle;
             }
+        }
+        .add-bag{
+            width: 60%;
+            height: 50px;
+            font-weight: 700;
+        }
+        .disabled{
+            background-color: #c9d1d8 !important;
         }
     }
 }

@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./js/component/scrollToTop";
 import 'font-awesome/css/font-awesome.min.css';
+//import firebase from "firebase";
 //import {AuthProvider} from "./js/store/AuthContext"
 //import PrivateRoute from './js/component/priv-route';
 
@@ -50,7 +51,7 @@ const App = () => {
 								<Route exact path="/products">
 									<Products />
 								</Route>
-								<Route exact path="/single-product">
+								<Route exact path="/single-product/:id/:l">
 									<SingleProduct />
 								</Route>
 								<Route>
