@@ -14,8 +14,6 @@ export function Product(props) {
 		product.update({'fav': !isLiked});
 	};
 
-	//console.log(img);
-	//console.log(props);
 	return (
 		<div key={1} className="">
 			<Link to={"/single-product/"+props.id+"/"+props.fav}>

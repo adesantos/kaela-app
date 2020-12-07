@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import { Link } from "react-router-dom";
 import { BagProduct } from "./bag-product";
 import firebase from '../config';
 import { useObjectVal } from "react-firebase-hooks/database";

@@ -2,10 +2,6 @@
 
 $primary-btn: #F783AC;
 
-.kaela-brand{
-    margin-right: 25%;
-}
-
 hr{
     width: 55%;
     border-top: 1px solid #F4ACB7;
@@ -351,4 +347,12 @@ hr{
 footer{
     color: #FFF;
     background-color: #9D8189;
+}
+
+/**/
+.navbar-expand-lg{
+    justify-content: space-between !important;
+}
+.navbar-collapse{
+    flex-grow: inherit !important;
 }
