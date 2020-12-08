@@ -144,7 +144,7 @@ export function SingleProduct(){
                             <button type="submit" className="btn btn-pink add-bag" onClick={() => addToBag()}>ADD TO BAG</button>
                         ): <button className="btn add-bag disabled" disabled>ADD TO BAG</button>}
                         <button className="like" onClick={handleLike}>
-                            <i className={isLiked ? "fa fa-heart" : "fa fa-heart-o"} />
+                            <i className={isLiked=="true" ? "fa fa-heart" : "fa fa-heart-o"} />
                         </button>
                     </div>
                 </div>

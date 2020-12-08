@@ -4,7 +4,6 @@ import {AuthContext} from "../store/AuthContext";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
-	//var user = firebase.auth().currentUser;
 	const {currentUser} = useContext(AuthContext);
     if(currentUser){
 		var email, uid;

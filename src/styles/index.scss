@@ -238,10 +238,22 @@ hr{
             font-weight: 500;
         }
         .item-move{
-            margin-top: auto;
+            width: 80%;
+            bottom: 0px;
+            position: absolute; 
+            .item-wish{
+                padding: 0;
+                border: none;
+                color: #797979;
+                background-color: transparent;
+            }
             .item-trash{
                 float: right;
                 color: #cacaca;
+                padding: 0;
+                border: none;
+                color: #797979;
+                background-color: transparent;
             }
         }
     }
@@ -260,6 +272,7 @@ hr{
         height: 50px;
         margin-top: 50px;
         font-weight: 700;
+        line-height: 35px;
     }
 }
 

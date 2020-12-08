@@ -11,6 +11,7 @@ import SignUp  from "./js/component/singup";
 import { Wishlist } from "./js/views/wishlist";
 import { Bag } from "./js/views/bag";
 import { Products } from "./js/views/product-list";
+import { Checkout } from "./js/component/checkout";
 import { SingleProduct } from "./js/views/single-product";
 
 import { Navbar } from "./js/component/navbar";
@@ -43,6 +44,9 @@ const App = () => {
 										</Route>
 										<Route exact path="/products">
 											<Products />
+										</Route>
+										<Route exact path="/checkout">
+											<Checkout />
 										</Route>
 										<Route exact path="/single-product/:id/:l">
 											<SingleProduct />

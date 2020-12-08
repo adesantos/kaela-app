@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BagProduct } from "./bag-product";
 import firebase from '../config';
+import { Link } from "react-router-dom";
 import { useObjectVal } from "react-firebase-hooks/database";
 
 export function Bag() {
@@ -61,7 +62,9 @@ export function Bag() {
 					<span className="total">
 						<b>US ${parseFloat(total).toFixed(2)}</b>
 					</span>
-					<button className="btn btn-block btn-pink btn-checkout">CHECKOUT</button>
+					<Link to="/checkout" className="btn btn-block btn-pink btn-checkout">
+						<span>CHECKOUT</span>
+					</Link>
 				</div>
 			</div>
 		</div>
