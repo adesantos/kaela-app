@@ -16,7 +16,7 @@ export function SingleProduct(){
     const [dbimg, loadingImg, errorImg] = useDownloadURL(dbImgs);
     const url = (dbimg)? dbimg : loadingImg;
 
-    const [isLiked, updateLike] = useState(params.l);
+    const [isLiked, updateLike] = useState(params.l ==="true"?true:false);
     const [count, setCount] = useState(1);
     const price = parseFloat(product.price).toFixed(2);
     
@@ -144,7 +144,7 @@ export function SingleProduct(){
                             <button type="submit" className="btn btn-pink add-bag" onClick={() => addToBag()}>ADD TO BAG</button>
                         ): <button className="btn add-bag disabled" disabled>ADD TO BAG</button>}
                         <button className="like" onClick={handleLike}>
-                            <i className={isLiked=="true" ? "fa fa-heart" : "fa fa-heart-o"} />
+                            <i className={isLiked ? "fa fa-heart" : "fa fa-heart-o"} />
                         </button>
                     </div>
                 </div>

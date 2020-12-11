@@ -19,7 +19,7 @@ export function Products() {
 						loading
 					): Object.keys(products).map(function(i) {
 						return (
-							<div key={i} className="col-4 margin-top">
+							<div key={i} className="col-3 margin-top">
 								<Product {...products[i]} />
 							</div>
 						);

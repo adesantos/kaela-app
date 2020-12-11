@@ -71,54 +71,20 @@ export function Home() {
 					</div>
 				</div>
 
-				<div id="reviews" className="col-12">
-					<div className="row">
-						<div className="col-4">
-							<div className="card">
-								<img src="" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">review</h5>
-									<p className="card-text" />
-								</div>
-							</div>
-						</div>
-
-						<div className="col-4">
-							<div className="card">
-								<img src="" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">review</h5>
-									<p className="card-text" />
-								</div>
-							</div>
-						</div>
-
-						<div className="col-4">
-							<div className="card">
-								<img src="" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">review</h5>
-									<p className="card-text" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
 				<div id="stores" className="col-12">
 					<div className="row">
 						<div className="col-4">
-							<a href="#">
+							<a target="_blank" href="https://www.instagram.com/kaela.shop/">
 								<img src={Img6} className="img-fluid" alt="..." />
 							</a>
 						</div>
 						<div className="col-4">
-							<a href="#">
+							<a target="_blank" href="https://www.etsy.com/shop/KaelaShopBoutique">
 								<img src={Img7} className="img-fluid" alt="..." />
 							</a>
 						</div>
 						<div className="col-4">
-							<a href="#">
+							<a target="_blank" href="https://www.amazon.com/-/es/dp/B088MDG9TF/?ref=exp_kaela.shop_dp_vv_mw">
 								<img src={Img8} className="img-fluid" alt="..." />
 							</a>
 						</div>
