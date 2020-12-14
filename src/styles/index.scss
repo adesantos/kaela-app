@@ -47,7 +47,19 @@ hr{
         margin-right: 25%;
     }
     .navbar-nav{
-        .nav-item{
+        .nav-item .dropdown > {
+            button{
+                font-size: 18px;
+                color: #F783AC !important;
+            }
+            .btn:focus, .btn.focus{
+                box-shadow: none;
+            }
+            .dropdown-toggle::after{
+                content: none;
+            }
+        }
+        /*.nav-item{
             .search{
                 input{
                     height: 30px;
@@ -61,7 +73,7 @@ hr{
                     }
                 }
             }
-        }
+        }*/
     }
     border-bottom: 1px solid #F4ACB7;
 }
@@ -274,6 +286,16 @@ hr{
         font-weight: 700;
         line-height: 35px;
     }
+    .disabled{
+        border-color: #c9d1d8 !important;
+        background-color: #c9d1d8 !important;
+    }
+}
+.bag-checkout{
+    padding: 20px 100px 50px 100px;
+    .bagcheckout-title{
+        font-size: 11px;
+    }
 }
 
 
@@ -325,6 +347,14 @@ hr{
                 text-align: center;
                 list-style-type: none;
                 border: 1px solid #cacaca;
+                button{
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }
+                button.not-selected:focus{
+                    outline: none !important;
+                }
             }
         }
     }

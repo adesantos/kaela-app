@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import firebase from '../config';
 import {AuthContext} from "../store/AuthContext";
 import { Link } from "react-router-dom";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 export const Navbar = () => {
 	const {currentUser} = useContext(AuthContext);
@@ -9,7 +11,7 @@ export const Navbar = () => {
 		var email, uid;
 		email = currentUser.email;
 		uid = currentUser.uid;
-		console.log(email);
+		console.log(uid);
 	}
 	return (
 		<nav className="navbar navbar-expand-lg">
@@ -48,7 +50,15 @@ export const Navbar = () => {
 									<i className="fa fa-user" />
 								</Link>
 							</li>
-						): null
+						):
+						<li className="nav-item dropdown">
+							<DropdownButton variant="none" id="" title={<i className="fa fa-user" />}>
+								<Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
+								<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+								<hr className="w-100"/>
+								<Dropdown.Item href="/login" onClick={() => firebase.auth().signOut()}>Sign Out</Dropdown.Item>
+							</DropdownButton>
+						</li>
 					}
 					<li className="nav-item">
 						<Link to="/wishlist" className="nav-link" href="#">
@@ -60,15 +70,6 @@ export const Navbar = () => {
 							<i className="fa fa-shopping-bag" />
 						</Link>
 					</li>
-					{
-						currentUser?(
-							<li className="nav-item">
-								<Link to="/login" className="nav-link" href="#" onClick={() => firebase.auth().signOut()}>
-									<i className="fa fa-sign-out" />
-								</Link>
-							</li>
-						): null
-					}
 				</ul>
 			</div>
 		</nav>

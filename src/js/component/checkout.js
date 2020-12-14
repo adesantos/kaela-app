@@ -1,14 +1,23 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, useContext} from 'react';
+import firebase from '../config';
+import {AuthContext} from "../store/AuthContext";
+import { BagCheckout } from "../views/bagCheckout";
+import { useObjectVal } from "react-firebase-hooks/database";
 
 export function Checkout() {
+    const {currentUser} = useContext(AuthContext);
+	  const user = currentUser? currentUser.uid: 0;
     const [paidFor, setPaidFor] = useState(false)
     const [error, setError] = useState(null)
     const paypalRef = useRef();
     const product = {
-        price: 777.77,
-        name: 'comfy chair',
-        description: 'fancy chair, like new'
+        price: 20,
+        description: 'QUANTITY'
     };
+
+    const bag = firebase.database().ref("bag");
+    const [db_product, loadingB, errorB] =  useObjectVal(bag);
+    var products = db_product;
 
     useEffect(() => {
         window.paypal
@@ -43,18 +52,26 @@ export function Checkout() {
     if (paidFor) {
         return (
           <div>
-            <h1>Congrats, you just bought {product.name}!</h1>
+            <h1>Congrats! Your items are on their way!</h1>
           </div>
         );
       }
   
     return (
-        <div>
+        <div className="col-12 text-center">
+            <div className="row items-row bag-checkout">
+              {!db_product?(
+                  loadingB
+                ): Object.keys(products).map(function(i) {
+                  if(products[i].qty>0 && user===products[i].userId){
+                    return (
+                      <BagCheckout key={i} {...products[i]}/>
+                    );
+                  }
+                })}
+            </div>
             {error && <div>Uh oh, an error occurred! {error.message}</div>}
-            <h1>
-                {product.description} for ${product.price}
-            </h1>
-            <img alt={product.description} src={product.image} width="200" />
+            <div><h3>TOTAL US$00</h3></div>
             <div ref={paypalRef} />
         </div>
     );
