@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef, useContext} from 'react';
 import firebase from '../config';
+import { useParams } from "react-router-dom";
 import {AuthContext} from "../store/AuthContext";
 import { BagCheckout } from "../views/bagCheckout";
 import { useObjectVal } from "react-firebase-hooks/database";
@@ -10,8 +11,9 @@ export function Checkout() {
     const [paidFor, setPaidFor] = useState(false)
     const [error, setError] = useState(null)
     const paypalRef = useRef();
+    const params = useParams();
     const product = {
-        price: 20,
+        price: params.total,
         description: 'QUANTITY'
     };
 
@@ -71,7 +73,7 @@ export function Checkout() {
                 })}
             </div>
             {error && <div>Uh oh, an error occurred! {error.message}</div>}
-            <div><h3>TOTAL US$00</h3></div>
+            <div><h3>TOTAL US${params.total}</h3></div>
             <div ref={paypalRef} />
         </div>
     );

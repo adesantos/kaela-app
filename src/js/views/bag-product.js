@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 
-export function BagProduct({prod, onChildClick, a}) {
+export function BagProduct({prod, onChildClick, index, a}) {
 	var empty = true;
 	const child = prod.id;
 	//console.log(a);
@@ -29,7 +29,9 @@ export function BagProduct({prod, onChildClick, a}) {
 	const [count, setCount] = useState(propsQty);
 	const initialPrice = propsQty > 0? price*propsQty : price;
 	const [subTotal, setSubTotal] = useState(initialPrice);
-	onChildClick(subTotal, child, a, false);
+
+	const i = Number(index);
+	onChildClick(a);
 
 	const handleRemove = (val) => {
 		if(!val){
@@ -51,7 +53,8 @@ export function BagProduct({prod, onChildClick, a}) {
 		setCount(count - 1);
 		setSubTotal(subTotal - price);
 		bag.update({'qty': count - 1});
-		onChildClick(subTotal - price, child, a, true);
+		a[i][prod.id] = subTotal - price;
+		onChildClick(a);
 		checkCount(count-1);
 	}
 
@@ -59,10 +62,10 @@ export function BagProduct({prod, onChildClick, a}) {
 		setCount(count + 1);
 		setSubTotal(subTotal + price);
 		bag.update({'qty': count + 1});
-		onChildClick(subTotal + price, child, a, true);
+		a[i][prod.id] = subTotal + price;
+		onChildClick(a);
 	}
 
-	console.log(bagProducts.s);
 	return (
 		<div>
 			{!product?(

@@ -10,52 +10,27 @@ export function Bag() {
 	const user = currentUser? currentUser.uid: 0;
 	const bag = firebase.database().ref("bag");
 	const [db_product, loading, error] =  useObjectVal(bag);
-	const [newArray, setNewarray] = useState([]);
 	const [total, setTotal] = useState(0);
 	var empty = true;
 	var array = [];
 	var products = db_product;
 	var count = 0;
 
-
 	useEffect(() => {
-		handleChildClick();
+		setTotal(0);
 	}, []);
 
 	const calculateSubTotal = (ar) =>{
 		var am = 0;
 		const size = Object.keys(ar).length;
 		for(var i=0;i<size;i++){
-			am = am + ar[i][i+1];
+			am = am + ar[i][i];
 		}
 		return am;
 	}
 
-	const checkChild = (a, c, ar) =>{
-		var newArray = [];
-		const size = Object.keys(ar).length;
-		for(var i=0;i<size;i++){
-			var key = Number(Object.keys(ar)[i]);
-			var value = ar[i][i+1];
-			if(key===c){
-				newArray.push({[key]:a});
-			}else{
-				newArray.push({[key]:value});
-			}
-		}
-		setTotal(calculateSubTotal(newArray));
-	}
-
-	const handleChildClick = (a, c, ar, bool) =>{
-		if(ar){
-			if(!bool){
-				//console.log("primera vez");
-				setTotal(calculateSubTotal(ar));
-			}else{
-				//console.log("segunda");
-				checkChild(a, c, ar);
-			}
-		}
+	const handleChildClick = (a) =>{
+		setTotal(calculateSubTotal(a));
 	}
 
 	const showNouser = (
@@ -93,10 +68,11 @@ export function Bag() {
 									empty = false;
 									count = count + 1;
 									var price = Number(products[i].price);
-									array.push({[products[i].id]:price});
+									var qty = Number(products[i].qty);
+									array.push({[count-1]:price*qty});
 									return (
 										<div key={i} className="col-12">
-											<BagProduct prod={products[i]} onChildClick={handleChildClick} a={array}/>
+											<BagProduct prod={products[i]} onChildClick={handleChildClick} index={count-1} a={array}/>
 										</div>
 									);
 								}
@@ -117,13 +93,13 @@ export function Bag() {
 						<hr />
 						<span>Subtotal</span>
 						<span className="total">
-							<b>US ${parseFloat(total).toFixed(2)}</b>
+							<b>US ${empty?"0":parseFloat(total).toFixed(2)}</b>
 						</span>
 						{empty?(
 							<Link to="" className="btn btn-block btn-pink btn-checkout disabled">
 								<span>CHECKOUT</span>
 							</Link>
-						):<Link to="/checkout" className="btn btn-block btn-pink btn-checkout"><span>CHECKOUT</span></Link>}
+						):<Link to={"/checkout/"+total} className="btn btn-block btn-pink btn-checkout"><span>CHECKOUT</span></Link>}
 					</div>
 				):null}
 			</div>

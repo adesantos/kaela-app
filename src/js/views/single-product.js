@@ -86,13 +86,10 @@ export function SingleProduct(){
 
     const handleLike = () => {
 		if(isLiked){
-            console.log("aqui");
 			likePathBYId.remove();
 		}else{
-            console.log("aqui");
 			if(currentUser){
                 if(emptyLike){
-                    console.log("aqui");
                     likePath.child(1).set({
                         "id": 1,
                         "itemId": product.id,
@@ -100,7 +97,6 @@ export function SingleProduct(){
                         "userId": user
                     });
                 }else{
-                    console.log("aqui");
                     var last = checkLastId()+1;
                     likePath.child(last).set({
                         "id": last,
