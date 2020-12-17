@@ -120,11 +120,11 @@ export function SingleProduct(){
     
     function handleSize(s){
         setSizeSlect(!sizeSelected);
-        if(s===size && !sizeSelected){
-            setSize(null);
-        }else{
+        //if(s===size && !sizeSelected){
+       //     setSize(null);
+        //}else{
             setSize(s);
-        }
+        //}
         
     }
     function addToBag(){
