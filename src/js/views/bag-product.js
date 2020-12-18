@@ -40,7 +40,6 @@ export function BagProduct({prod, onChildClick, index, a}) {
 	const [subTotal, setSubTotal] = useState(initialPrice);
 
 	const [sizeSelected, setSizeSlect] = useState(false);
-    const [size, setSize] = useState(null);
 
 	const i = Number(index);
 	onChildClick(a);
@@ -58,18 +57,18 @@ export function BagProduct({prod, onChildClick, index, a}) {
 		return Number(likeId);
 	}
 
-	const checkSizeRemove = () =>{
+	const checkSizeRemove = (size) =>{
 		var resp=false;
 		if((bagProducts.s!="" && bagProducts.m!="") || (bagProducts.s!="" && bagProducts.l!="") || (bagProducts.m!="" && bagProducts.l!="") || (bagProducts.s!="" && bagProducts.m!="" && bagProducts.l!="")){
-			if(sizeSelected){
-				//bag.remove();
-				//setSubTotal(0);
+			if(size){
+				bag.update({[size]: 0});
 				resp=true;
+				setSizeSlect(true);
+				countMinus();
 			}else{
 				alert("Please Select the SIZE!");
 			}
 		}else{
-			console.log("aqui");
 			bag.remove();
 			setSubTotal(0);
 			resp=true;
@@ -94,6 +93,7 @@ export function BagProduct({prod, onChildClick, index, a}) {
 				"userId": user
 			});
 		}
+		handleRemoveItem();
 	}
 
 	const handleRemoveItem = () => {
@@ -105,18 +105,22 @@ export function BagProduct({prod, onChildClick, index, a}) {
 
 	function checkCount(c){
 		if(c == 0){
-			handleRemove();
+			handleRemoveItem();
 		}
 	}
 
-	function handleCountMinus() {
+	function countMinus(){
+		setCount(count - 1);
+		setSubTotal(subTotal - price);
+		bag.update({'qty': count - 1});
+		a[i][prod.id] = subTotal - price;
+		onChildClick(a);
+		checkCount(count-1);
+	}
+
+	function handleCountMinus(b) {
 		if(checkSizeRemove()){
-			setCount(count - 1);
-			setSubTotal(subTotal - price);
-			bag.update({'qty': count - 1});
-			a[i][prod.id] = subTotal - price;
-			onChildClick(a);
-			checkCount(count-1);
+			countMinus();
 		}
 	}
 
@@ -142,13 +146,15 @@ export function BagProduct({prod, onChildClick, index, a}) {
 							</div>
 							<div className="col-7 item-info">
 								<span className="item-name">{product.title}</span>
-								<ul>
-									<br/><br/>
-									<div>Size:</div>
-									{bagProducts.s?(<div><li><button className={sizeSelected? " ": "not-selected"}>S</button></li></div>):""}
-									{bagProducts.m?(<div><li><button className={sizeSelected? " ": "not-selected"}>M</button></li></div>):""}
-									{bagProducts.l?(<div><li><button className={sizeSelected? " ": "not-selected"}>L</button></li></div>):""}
-								</ul>
+								<div className="div-size col-12">
+									<p>Select the size you want to delete:</p>
+									<ul>
+										<br/><br/>
+										{bagProducts.s?(<li><button className={sizeSelected? " ": "not-selected"} onClick={() => checkSizeRemove("s")}>S</button></li>):""}
+										{bagProducts.m?(<li><button className={sizeSelected? " ": "not-selected"} onClick={() => checkSizeRemove("m")}>M</button></li>):""}
+										{bagProducts.l?(<li><button className={sizeSelected? " ": "not-selected"} onClick={() => checkSizeRemove("l")}>L</button></li>):""}
+									</ul>
+								</div>
 								<div className="item-move">
 									<button onClick={() => handleRemove()} className="item-wish">Move to wishlist</button>
 									<button onClick={() => handleRemoveItem()} className="item-trash">

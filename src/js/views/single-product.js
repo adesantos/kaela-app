@@ -137,9 +137,9 @@ export function SingleProduct(){
                         "qty": count,
                         "price": price,
                         "userId": user,
-                        "l": size==="L"?"L":"",
-                        "m": size==="M"?"M":"",
-                        "s": size==="S"?"S":""
+                        "l": size==="L"?1:0,
+                        "m": size==="M"?1:0,
+                        "s": size==="S"?1:0
                     });
                 }else{
                     if(exists.id){
@@ -150,9 +150,9 @@ export function SingleProduct(){
                         }else{
                             validateQty = product.qty;
                         }
-                        var sizeS = shopBag.s? shopBag.s: (size==="S"?"S":"");
-                        var sizeM = shopBag.m? shopBag.m: (size==="M"?"M":"");
-                        var sizeL = shopBag.l? shopBag.l: (size==="L"?"L":"");
+                        var sizeS = shopBag.s? shopBag.s: (size==="S"?1:0);
+                        var sizeM = shopBag.m? shopBag.m: (size==="M"?1:0);
+                        var sizeL = shopBag.l? shopBag.l: (size==="L"?1:0);
                         bag.child(exists.id).update({
                             'qty': validateQty, 
                             'l': sizeL, 
@@ -167,9 +167,9 @@ export function SingleProduct(){
                             "qty": count,
                             "price": price,
                             "userId": user,
-                            "l": size==="L"?"L":"",
-                            "m": size==="M"?"M":"",
-                            "s": size==="S"?"S":""
+                            "l": size==="L"?1:0,
+                            "m": size==="M"?1:0,
+                            "s": size==="S"?1:0
                         });
                     }
                 }

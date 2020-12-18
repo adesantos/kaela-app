@@ -302,7 +302,35 @@ hr{
     }
 }
 
-
+.div-size{
+    margin-top: 40px;
+    p{
+        font-weight: 500;
+    }
+    ul{
+        display: flex;
+        padding-left: 0;
+        margin-top: 30px;
+        li{
+            width: 35px;
+            display: inline;
+            cursor: pointer;
+            margin-left: 10px;
+            margin-right: 10px;
+            text-align: center;
+            list-style-type: none;
+            border: 1px solid #cacaca;
+            button{
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            button.not-selected:focus{
+                outline: none !important;
+            }
+        }
+    }
+}
 
 
 /*SINGLE PRODUCT*/
@@ -334,32 +362,10 @@ hr{
         }
     }
     .div-size{
-        width: 35%;
-        margin-top: 40px;
-        p{
-            font-weight: 500;
-        }
+        width: 35% !important;
         ul{
-            display: flex;
-            padding-left: 0;
-            margin-top: 30px;
-            justify-content: space-between;
-            li{
-                width: 35px;
-                display: inline;
-                cursor: pointer;
-                text-align: center;
-                list-style-type: none;
-                border: 1px solid #cacaca;
-                button{
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                }
-                button.not-selected:focus{
-                    outline: none !important;
-                }
-            }
+            display: flex !important;
+            justify-content: space-between !important;
         }
     }
     .div-buttons{

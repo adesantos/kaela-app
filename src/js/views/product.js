@@ -67,7 +67,7 @@ export function Product({prod, fav, id}) {
 			<Link to={"/single-product/"+prod.id+"/"+fav+"/"+id}>
 				<img src={(imgUrl)? imgUrl: loading} className={"img-fluid"} alt="..." />
 			</Link>
-			<Link to="/single-product" className="product-name">
+			<Link to={"/single-product/"+prod.id+"/"+fav+"/"+id} className="product-name">
 				<span>{prod.title}</span>
 			</Link>
 			<button className="like" onClick={() => handleLike()}>
