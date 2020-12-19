@@ -42,22 +42,34 @@ export function SingleProduct(){
     const [lastId, setLast] = useState([]);
     const [exists, setExist] = useState([]);
 
-    const bagByid = firebase.database().ref("bag/"+exists.id);//BY ID
-    const [dbbagByid, loadingBb, errorBb] =  useObjectVal(bagByid);
-    const shopBag = dbbagByid? dbbagByid : loadingBb;
-
     /*LAST ITEM IN THE BAG TO GET THE LAST ID*/
     useEffect(() => {
+        var id;
         bag.limitToLast(1).once("child_added", function (snapshot) {
-            var id;
             if(snapshot.exists()){
                 id = snapshot.val();
-                setLast(id.id);
             }else{
                 emptyBag=true;
             }
         })
+        .then(function() {
+            setLast(id.id);
+        });
       }, []);
+
+    useEffect(() => {
+        bag.orderByChild("idItem").equalTo(Number(id)).on("child_added", function (snapshot) {
+            if(snapshot.exists()){
+                setExist(snapshot.val());
+            }else{
+                emptyBag=true;
+            }
+        });
+    }, []);
+
+    const bagByid = firebase.database().ref("bag/"+exists.id);//BY ID
+    const [dbbagByid, loadingBb, errorBb] =  useObjectVal(bagByid);
+    const shopBag = dbbagByid? dbbagByid : loadingBb;
 
     /*LAST ITEM IN THE LIKED TO GET THE LAST ID*/
     function checkLastId (){
@@ -70,17 +82,7 @@ export function SingleProduct(){
 			});
 		}
 		return Number(likeId);
-	}
-    /*CHECKE IF THE ITEM EXISTS*/
-    useEffect(() => {
-        bag.orderByChild("idItem").equalTo(Number(id)).on("child_added", function (snapshot) {
-            if(snapshot.exists()){
-                setExist(snapshot.val());
-            }else{
-                emptyBag=true;
-            }
-        });
-    }, []);
+    }
 
     const soldOut = (product.qty > 0)? false : true;
 
@@ -120,12 +122,7 @@ export function SingleProduct(){
     
     function handleSize(s){
         setSizeSlect(!sizeSelected);
-        //if(s===size && !sizeSelected){
-       //     setSize(null);
-        //}else{
-            setSize(s);
-        //}
-        
+        setSize(s);
     }
     function addToBag(){
         if(currentUser){
@@ -142,7 +139,7 @@ export function SingleProduct(){
                         "s": size==="S"?1:0
                     });
                 }else{
-                    if(exists.id){
+                    if(exists.id && user==exists.userId){
                         var itemQty = Number(shopBag.qty);
                         var validateQty = 0;
                         if((itemQty+count) <= product.qty){

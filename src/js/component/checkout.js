@@ -1,11 +1,12 @@
 import React, {useState, useEffect, useRef, useContext} from 'react';
+import { Redirect} from "react-router";
 import firebase from '../config';
 import { useParams } from "react-router-dom";
 import {AuthContext} from "../store/AuthContext";
 import { BagCheckout } from "../views/bagCheckout";
 import { useObjectVal } from "react-firebase-hooks/database";
 
-export function Checkout() {
+export function Checkout(){
     const {currentUser} = useContext(AuthContext);
 	  const user = currentUser? currentUser.uid: 0;
     const [paidFor, setPaidFor] = useState(false)
@@ -14,7 +15,7 @@ export function Checkout() {
     const params = useParams();
     const product = {
         price: params.total,
-        description: 'QUANTITY'
+        description: ""
     };
 
     const bag = firebase.database().ref("bag");
@@ -50,21 +51,20 @@ export function Checkout() {
           .render(paypalRef.current);
       }, [product.description, product.price]);
 
-
-    if (paidFor) {
-        return (
-          <div>
-            <h1>Congrats! Your items are on their way!</h1>
-          </div>
-        );
-      }
+    if(paidFor){
+      return (
+        <div>
+          <h1>Congrats! Your items are on their way!</h1>
+        </div>
+      );
+    }
   
     return (
         <div className="col-12 text-center">
             <div className="row items-row bag-checkout">
               {!db_product?(
                   loadingB
-                ): Object.keys(products).map(function(i) {
+                ):Object.keys(products).map(function(i) {
                   if(products[i].qty>0 && user===products[i].userId){
                     return (
                       <BagCheckout key={i} {...products[i]}/>

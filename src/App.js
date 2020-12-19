@@ -12,7 +12,7 @@ import { Wishlist } from "./js/views/wishlist";
 import { Bag } from "./js/views/bag";
 import { Products } from "./js/views/product-list";
 import { BagCheckout } from "./js/views/bagCheckout";
-import { Checkout } from "./js/component/checkout";
+import  {Checkout} from "./js/component/checkout";
 import { SingleProduct } from "./js/views/single-product";
 
 import { Navbar } from "./js/component/navbar";
